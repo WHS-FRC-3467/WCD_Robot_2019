@@ -7,14 +7,17 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 /**
  *
  */
-public class ResetDriveEncoders extends InstantCommand {
+public class ResetDriveEncoders extends InstantCommand
+{
 
-    public ResetDriveEncoders() {
+    public ResetDriveEncoders()
+    {
         requires(Robot.sub_drivetrain);
     }
 
-    protected void execute() {
-		Robot.sub_drivetrain.resetEncoders();
+    protected void execute()
+    {
+        Robot.sub_drivetrain.resetEncoders();
     }
 
 }

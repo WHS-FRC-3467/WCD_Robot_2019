@@ -9,16 +9,19 @@ import org.team3467.robot2019.subsystems.Drivetrain.DriveBot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 
-public class OI {
+public class OI
+{
 
     private static XboxController driverController;
     private static XboxController operatorController;
 
-    public OI() {
+    public OI()
+    {
         init();
     }
 
-    public void init() {
+    public void init()
+    {
         driverController = new XboxController(0);
         operatorController = new XboxController(1);
 
@@ -26,28 +29,28 @@ public class OI {
     }
 
     @SuppressWarnings("resource")
-    public void bindControllerCommands() {
+    public void bindControllerCommands()
+    {
 
+        /*
+         *
+         * Drive Controller
+         * 
+         */
 
-		/*
-		 *
-		 * Drive Controller
-		 * 
-		 */
-		
-		// DPad will change drive control mode
-		new XBoxControllerDPad(driverController, XboxController.DPad.kDPadUp).whenActive(new DriveBot(DriveBot.driveMode_Tank, false));
-		new XBoxControllerDPad(driverController, XboxController.DPad.kDPadDown).whenActive(new DriveBot(DriveBot.driveMode_Rocket, false));
-		
-		// The "A" Button will shift any drive mode to Precision mode
-		new XboxControllerButton(driverController, XboxController.Button.kA).whenActive(new DriveBot(DriveBot.driveMode_Rocket, true));
+        // DPad will change drive control mode
+        new XBoxControllerDPad(driverController, XboxController.DPad.kDPadUp).whenActive(new DriveBot(DriveBot.driveMode_Tank, false));
+        new XBoxControllerDPad(driverController, XboxController.DPad.kDPadDown).whenActive(new DriveBot(DriveBot.driveMode_Rocket, false));
 
-		// The "X" button activates "turn in place" while held down
-		new XboxControllerButton(driverController, XboxController.Button.kX).whileActive(new DriveBot(DriveBot.driveMode_RocketSpin, false));
+        // The "A" Button will shift any drive mode to Precision mode
+        new XboxControllerButton(driverController, XboxController.Button.kA).whenActive(new DriveBot(DriveBot.driveMode_Rocket, true));
+
+        // The "X" button activates "turn in place" while held down
+        new XboxControllerButton(driverController, XboxController.Button.kX).whileActive(new DriveBot(DriveBot.driveMode_RocketSpin, false));
 
         // Do Auto Lineup and move toward hatch or cargo markings using LimeLight tracking
-      //  new XBoxControllerDPad(driverController, XboxController.DPad.kDPadLeft).whileActive(new AutoLineup());
-        new XboxControllerButton(driverController, XboxController.Button.kStickLeft).whileActive(new AutoLineup());  
+        // new XBoxControllerDPad(driverController,XboxController.DPad.kDPadLeft).whileActive(new AutoLineup());
+        new XboxControllerButton(driverController, XboxController.Button.kStickLeft).whileActive(new AutoLineup());
 
         /*
 		 * 
@@ -60,75 +63,95 @@ public class OI {
     //
     // Easier access to XBox controllers
     //
-    public static XboxController getDriverController() {
+    public static XboxController getDriverController()
+    {
         return driverController;
     }
-    public static XboxController getOperatorController() {
-        return  operatorController;
+
+    public static XboxController getOperatorController()
+    {
+        return operatorController;
     }
 
-    public static double getDriverLeftX() {
+    public static double getDriverLeftX()
+    {
         return driverController.getX(Hand.kLeft);
     }
 
-    public static double getDriverLeftY() {
+    public static double getDriverLeftY()
+    {
         return driverController.getY(Hand.kLeft);
     }
 
-    public static double getDriverRightY() {
+    public static double getDriverRightY()
+    {
         return driverController.getY(Hand.kRight);
     }
 
-    public static double getDriverLeftTrigger() {
+    public static double getDriverLeftTrigger()
+    {
         return driverController.getTriggerAxis(Hand.kRight);
     }
 
-    public static double getDriverRightTrigger() {
+    public static double getDriverRightTrigger()
+    {
         return driverController.getTriggerAxis(Hand.kLeft);
     }
 
-    public static double getOperatorLeftX() {
+    public static double getOperatorLeftX()
+    {
         return operatorController.getX(Hand.kLeft);
     }
 
-    public static double getOperatorLeftY() {
+    public static double getOperatorLeftY()
+    {
         return operatorController.getY(Hand.kLeft);
     }
 
-    public static double getOperatorRightX() {
+    public static double getOperatorRightX()
+    {
         return operatorController.getX(Hand.kRight);
     }
 
-    public static double getOperatorRightY() {
+    public static double getOperatorRightY()
+    {
         return operatorController.getY(Hand.kRight);
     }
 
-    public static boolean getOperatorButtonA() {
+    public static boolean getOperatorButtonA()
+    {
         return operatorController.getAButtonPressed();
     }
 
-    public static boolean getOperatorButtonBack() {
+    public static boolean getOperatorButtonBack()
+    {
         return operatorController.getBackButtonPressed();
     }
 
-    public static double getOperatorLeftTrigger() {
+    public static double getOperatorLeftTrigger()
+    {
         return operatorController.getTriggerAxis(Hand.kRight);
     }
 
-    public static double getOperatorRightTrigger() {
+    public static double getOperatorRightTrigger()
+    {
         return operatorController.getTriggerAxis(Hand.kLeft);
     }
 
-    public static void setDriverRumble(boolean rumbleOn) {
+    public static void setDriverRumble(boolean rumbleOn)
+    {
         driverController.setRumble(GenericHID.RumbleType.kLeftRumble, rumbleOn ? 1 : 0);
         driverController.setRumble(GenericHID.RumbleType.kRightRumble, rumbleOn ? 1 : 0);
     }
-    public static void setOperatorRumble(boolean rumbleOn) {
+
+    public static void setOperatorRumble(boolean rumbleOn)
+    {
         operatorController.setRumble(GenericHID.RumbleType.kLeftRumble, rumbleOn ? 1 : 0);
         operatorController.setRumble(GenericHID.RumbleType.kRightRumble, rumbleOn ? 1 : 0);
     }
 
-    public static void setOperatorRumble(double rumbleValue) {
+    public static void setOperatorRumble(double rumbleValue)
+    {
         operatorController.setRumble(GenericHID.RumbleType.kLeftRumble, rumbleValue);
         operatorController.setRumble(GenericHID.RumbleType.kRightRumble, rumbleValue);
     }

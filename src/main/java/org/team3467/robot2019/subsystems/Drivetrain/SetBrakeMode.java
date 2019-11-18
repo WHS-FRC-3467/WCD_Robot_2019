@@ -7,17 +7,20 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 /**
  *
  */
-public class SetBrakeMode extends InstantCommand {
+public class SetBrakeMode extends InstantCommand
+{
 
-	boolean brakesOn;
-	
-    public SetBrakeMode(boolean setBrake) {
+    boolean brakesOn;
+
+    public SetBrakeMode(boolean setBrake)
+    {
         requires(Robot.sub_drivetrain);
         brakesOn = setBrake;
     }
 
-    protected void execute() {
-    	Robot.sub_drivetrain.setTalonBrakes(brakesOn);
+    protected void execute()
+    {
+        Robot.sub_drivetrain.setTalonBrakes(brakesOn);
     }
 
 }
