@@ -4,6 +4,7 @@ import org.team3467.robot2019.subsystems.Drivetrain.Drivetrain;
 import org.team3467.robot2019.subsystems.FieldCamera.FieldCamera;
 import org.team3467.robot2019.subsystems.LED.LEDSerial;
 import org.team3467.robot2019.subsystems.Limelight.Limelight;
+import org.team3467.robot2019.subsystems.Pneumatics.Pneumatics;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -15,6 +16,8 @@ public class Robot extends TimedRobot
     public static FieldCamera fieldCamera;
 
     public static Drivetrain sub_drivetrain;
+
+    public static Pneumatics pneumatics;
 
     // public static Gyro sub_gyro;
     public static LEDSerial sub_led;
@@ -32,6 +35,8 @@ public class Robot extends TimedRobot
         sub_drivetrain = Drivetrain.getInstance();
         //sub_gyro = Gyro.getInstance();
 
+        pneumatics= Pneumatics.getInstance();
+        
         robot_oi = new OI();
     }
 
@@ -100,7 +105,7 @@ public class Robot extends TimedRobot
         {
             SmartDashboard.putNumber("Match Time", DriverStation.getInstance().getMatchTime());
 
-        } catch (Exception e)
+        } catch (final Exception e)
         {
             SmartDashboard.putNumber("Match Time", -99999);
         }
