@@ -14,7 +14,7 @@ public class OpenHands extends InstantCommand {
 	}
 	
     protected void execute() {
-    	Robot.pneumatics.openHands();
+    	Robot.pneumatics.cataLatch();
     }
     
 }

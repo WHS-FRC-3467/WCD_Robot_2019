@@ -11,12 +11,10 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 public class Pneumatics extends Subsystem {
 
 	private Compressor scorpionCompressor;
-	private static boolean  gearShiftPistonState = true;
 	private static boolean  handPistonState = false;
 	
 	// Solenoids
-	public DoubleSolenoid gearShift;
-	public DoubleSolenoid handsOpen;
+	public DoubleSolenoid cataPiston;
 	
 	// Pneumatics is a singleton
 	private static Pneumatics instance = new Pneumatics();
@@ -42,49 +40,30 @@ public class Pneumatics extends Subsystem {
 	}
 	
 	private void initSolenoids() {
-		gearShift = new DoubleSolenoid(0, 1);
-		handsOpen = new DoubleSolenoid(2,3);
+		cataPiston = new DoubleSolenoid(0,1);
 		
-		gearShift.set(DoubleSolenoid.Value.kForward);
-		handsOpen.set(DoubleSolenoid.Value.kForward);
+		cataPiston.set(DoubleSolenoid.Value.kForward);
 	}
 	
 	/*
 	 * Custom Pneumatics Helper methods
 	 */
 		
-	public void shiftUp() {
-		gearShift.set(DoubleSolenoid.Value.kForward);
-	}
-	public void shiftDown() {
-		gearShift.set(DoubleSolenoid.Value.kReverse);
-	}
-	
-	public void shiftGears() {
-		if (gearShiftPistonState) {
-			shiftUp();
-			gearShiftPistonState = false;
-		}
-		else {
-			shiftDown();
-			gearShiftPistonState = true;
-		}
-	}
 
-	public void openHands() {
-		handsOpen.set(DoubleSolenoid.Value.kReverse);
+	public void cataLatch() {
+		cataPiston.set(DoubleSolenoid.Value.kReverse);
 	}
-	public void closeHands() {
-		handsOpen.set(DoubleSolenoid.Value.kForward);
+	public void cataShoot() {
+		cataPiston.set(DoubleSolenoid.Value.kForward);
 	}
 	
 	public void operateHands() {
 		if (handPistonState) {
-			openHands();
+			cataLatch();
 			handPistonState = false;
 		}
 		else {
-			closeHands();
+			cataShoot();
 			handPistonState = true;
 		}
 	}

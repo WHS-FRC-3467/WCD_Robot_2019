@@ -14,7 +14,7 @@ public class CloseHands extends InstantCommand {
 	}
 	
     protected void execute() {
-    	Robot.pneumatics.closeHands();
+    	Robot.pneumatics.cataShoot();
     }
     
 }
