@@ -84,5 +84,4 @@ public class Pneumatics extends Subsystem {
 	protected void initDefaultCommand() {
 		this.setDefaultCommand(new Compressor_ReportStatus());
 	}
-
 }

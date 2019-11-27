@@ -5,6 +5,8 @@ import org.team3467.robot2019.robot.Control.XboxController;
 import org.team3467.robot2019.robot.Control.XboxControllerButton;
 import org.team3467.robot2019.subsystems.Drivetrain.AutoLineup;
 import org.team3467.robot2019.subsystems.Drivetrain.DriveBot;
+import org.team3467.robot2019.subsystems.Pneumatics.CloseHands;
+import org.team3467.robot2019.subsystems.Pneumatics.OpenHands;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -58,6 +60,11 @@ public class OI
 		 * 
 		 */
 
+         // Dpad up shoots ball with catapult
+         new XBoxControllerDPad(operatorController, XboxController.DPad.kDPadUp).whenActive(new CloseHands());
+
+         // Dpad down latches catapult
+         new XBoxControllerDPad(operatorController, XboxController.DPad.kDPadDown).whenActive(new OpenHands());
     }
 
     //
