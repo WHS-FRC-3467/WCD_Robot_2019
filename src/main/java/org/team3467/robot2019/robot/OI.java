@@ -5,8 +5,8 @@ import org.team3467.robot2019.robot.Control.XboxController;
 import org.team3467.robot2019.robot.Control.XboxControllerButton;
 import org.team3467.robot2019.subsystems.Drivetrain.AutoLineup;
 import org.team3467.robot2019.subsystems.Drivetrain.DriveBot;
-import org.team3467.robot2019.subsystems.Pneumatics.CloseHands;
-import org.team3467.robot2019.subsystems.Pneumatics.OpenHands;
+import org.team3467.robot2019.subsystems.Pneumatics.CataLatch;
+import org.team3467.robot2019.subsystems.Pneumatics.CataShoot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -61,10 +61,10 @@ public class OI
 		 */
 
          // Dpad up shoots ball with catapult
-         new XBoxControllerDPad(operatorController, XboxController.DPad.kDPadUp).whenActive(new CloseHands());
+         new XBoxControllerDPad(operatorController, XboxController.DPad.kDPadUp).whenActive(new CataShoot());
 
          // Dpad down latches catapult
-         new XBoxControllerDPad(operatorController, XboxController.DPad.kDPadDown).whenActive(new OpenHands());
+         new XBoxControllerDPad(operatorController, XboxController.DPad.kDPadDown).whenActive(new CataLatch());
     }
 
     //
@@ -145,19 +145,19 @@ public class OI
         return operatorController.getTriggerAxis(Hand.kLeft);
     }
 
-    public static void setDriverRumble(boolean rumbleOn)
+    public static void setDriverRumble(final boolean rumbleOn)
     {
         driverController.setRumble(GenericHID.RumbleType.kLeftRumble, rumbleOn ? 1 : 0);
         driverController.setRumble(GenericHID.RumbleType.kRightRumble, rumbleOn ? 1 : 0);
     }
 
-    public static void setOperatorRumble(boolean rumbleOn)
+    public static void setOperatorRumble(final boolean rumbleOn)
     {
         operatorController.setRumble(GenericHID.RumbleType.kLeftRumble, rumbleOn ? 1 : 0);
         operatorController.setRumble(GenericHID.RumbleType.kRightRumble, rumbleOn ? 1 : 0);
     }
 
-    public static void setOperatorRumble(double rumbleValue)
+    public static void setOperatorRumble(final double rumbleValue)
     {
         operatorController.setRumble(GenericHID.RumbleType.kLeftRumble, rumbleValue);
         operatorController.setRumble(GenericHID.RumbleType.kRightRumble, rumbleValue);

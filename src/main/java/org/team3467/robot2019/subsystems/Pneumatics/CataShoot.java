@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 /**
  *
  */
-public class CloseHands extends InstantCommand {
+public class CataShoot extends InstantCommand {
 
-	public CloseHands() {
+	public CataShoot() {
 	}
 	
     protected void execute() {
