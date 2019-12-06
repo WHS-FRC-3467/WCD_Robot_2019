@@ -8,11 +8,10 @@ public final class RobotGlobal
     // right side
     public final static int DRIVEBASE_TALON_R = 1;
     public final static int DRIVEBASE_VICTOR_R1 = 2;
-    public final static int DRIVEBASE_VICTOR_R2 = 3;
+
     // left side
-    public final static int DRIVEBASE_TALON_L = 6;
-    public final static int DRIVEBASE_VICTOR_L1 = 7;
-    public final static int DRIVEBASE_VICTOR_L2 = 8;
+    public final static int DRIVEBASE_TALON_L = 3;
+    public final static int DRIVEBASE_VICTOR_L1 = 4;
 
     public final static int GYRO = 11;
 
