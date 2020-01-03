@@ -4,7 +4,6 @@ import org.team3467.robot2019.robot.OI;
 import org.team3467.robot2019.robot.Robot;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Victor;
-import edu.wpi.first.wpilibj.XboxController;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -17,7 +16,6 @@ public class DriveBot extends Command
     private Victor rightMotor2 = new Victor(2);
     private Talon leftMotor1 = new Talon(3);
     private Victor leftMotor2 = new Victor(4);
-    private XboxController driverController = new XboxController(0);
     /**
      * Input adjustment switches
      */
@@ -130,8 +128,8 @@ public class DriveBot extends Command
             break;
 
         case driveMode_Rocket:
-            double speed2 = -driverController.getRawAxis(1) * 0.6;
-            double curve2 = driverController.getRawAxis(5) * 0.3;
+            double speed2 = -OI.getDriverController().getRawAxis(1) * 0.6;
+            double curve2 = OI.getDriverController().getRawAxis(5) * 0.3;
             double left = speed2 + curve2;
             double right = -(speed2 - curve2);
             leftMotor1.set(left);
