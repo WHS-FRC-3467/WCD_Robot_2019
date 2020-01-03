@@ -129,7 +129,10 @@ public class DriveBot extends Command
             double right = -(speed2 - curve2);
             Robot.sub_drivetrain.getLeftTalon().set(left);
             Robot.sub_drivetrain.getRightTalon().set(right);
-
+            if (speed2 == 0.0){
+                Robot.sub_drivetrain.getLeftTalon().set(curve2);
+                Robot.sub_drivetrain.getRightTalon().set(curve2);
+            }
             Robot.sub_drivetrain.drive(speed2, curve2, (m_driveMode == driveMode_Rocket));
 
             Robot.sub_drivetrain.reportEncoders();
