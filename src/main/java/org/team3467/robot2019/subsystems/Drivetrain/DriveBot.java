@@ -2,12 +2,22 @@ package org.team3467.robot2019.subsystems.Drivetrain;
 
 import org.team3467.robot2019.robot.OI;
 import org.team3467.robot2019.robot.Robot;
+import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.XboxController;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+
+
+
 public class DriveBot extends Command
 {
-
+    private Talon rightMotor1 = new Talon(1);
+    private Victor rightMotor2 = new Victor(2);
+    private Talon leftMotor1 = new Talon(3);
+    private Victor leftMotor2 = new Victor(4);
+    private XboxController driverController = new XboxController(0);
     /**
      * Input adjustment switches
      */
@@ -120,6 +130,20 @@ public class DriveBot extends Command
             break;
 
         case driveMode_Rocket:
+            double speed2 = -driverController.getRawAxis(1) * 0.6;
+            double curve2 = driverController.getRawAxis(5) * 0.3;
+            double left = speed2 + curve2;
+            double right = -(speed2 - curve2);
+            leftMotor1.set(left);
+            leftMotor2.set(right);
+            rightMotor1.set(right);
+            rightMotor2.set(right);
+
+            Robot.sub_drivetrain.drive(speed2, curve2, (m_driveMode == driveMode_Rocket));
+
+            Robot.sub_drivetrain.reportEncoders();
+            break;
+        
         case driveMode_RocketSpin:
 
             double speed = 0.0;
