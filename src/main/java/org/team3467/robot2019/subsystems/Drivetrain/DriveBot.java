@@ -2,8 +2,6 @@ package org.team3467.robot2019.subsystems.Drivetrain;
 
 import org.team3467.robot2019.robot.OI;
 import org.team3467.robot2019.robot.Robot;
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.Victor;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -12,10 +10,6 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class DriveBot extends Command
 {
-    private Talon rightMotor1 = new Talon(1);
-    private Victor rightMotor2 = new Victor(2);
-    private Talon leftMotor1 = new Talon(3);
-    private Victor leftMotor2 = new Victor(4);
     /**
      * Input adjustment switches
      */
@@ -132,10 +126,8 @@ public class DriveBot extends Command
             double curve2 = OI.getDriverController().getRawAxis(5) * 0.3;
             double left = speed2 + curve2;
             double right = -(speed2 - curve2);
-            leftMotor1.set(left);
-            leftMotor2.set(right);
-            rightMotor1.set(right);
-            rightMotor2.set(right);
+            Robot.sub_drivetrain.getLeftTalon().set(left);
+            Robot.sub_drivetrain.getRightTalon().set(right);
 
             Robot.sub_drivetrain.drive(speed2, curve2, (m_driveMode == driveMode_Rocket));
 
