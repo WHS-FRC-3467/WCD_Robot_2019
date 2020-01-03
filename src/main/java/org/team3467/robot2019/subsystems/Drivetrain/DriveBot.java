@@ -21,7 +21,7 @@ public class DriveBot extends Command
      */
     // Don't adjust the sticks at all
     static final boolean NO_STICK_ADJUSTMENT = false;
-    // square the inputs (while preserving the sign) to increase fine control while permitting full power.
+    // square the inputs (while preserving the sign) to increase fine control while permitting full power
     static final boolean SQUARE_INPUTS = true;
     // Limit the slew rate (rate of control signal change)
     static final boolean SLEW_LIMITING = true;
