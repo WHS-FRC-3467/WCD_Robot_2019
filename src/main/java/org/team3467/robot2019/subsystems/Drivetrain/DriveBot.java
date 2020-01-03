@@ -128,6 +128,7 @@ public class DriveBot extends Command
             break;
 
         case driveMode_Rocket:
+            //split arcade drive mode
             double speed2 = -OI.getDriverController().getRawAxis(1) * 0.6;
             double curve2 = OI.getDriverController().getRawAxis(5) * 0.3;
             double left = speed2 + curve2;
