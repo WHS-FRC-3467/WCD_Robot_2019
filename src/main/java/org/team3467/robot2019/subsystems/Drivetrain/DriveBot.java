@@ -30,7 +30,7 @@ public class DriveBot extends Command
 
     // Drive interface mode
     public static final int driveMode_Tank = 0;
-    public static final int driveMode_Rocket = 1;
+    public static final int driveMode_SplitArcade = 1;
     public static final int driveMode_RocketSpin = 2;
 
     private static final String[] driveModeNames =
@@ -42,7 +42,7 @@ public class DriveBot extends Command
     };
 
     // Default drive mode to Rocket drive
-    int m_driveMode = driveMode_Rocket;
+    int m_driveMode = driveMode_SplitArcade;
 
     // Precision mode scales control inputs to allow for finer control
     // Off by default
@@ -63,7 +63,7 @@ public class DriveBot extends Command
     {
         super(Robot.sub_drivetrain);
 
-        m_driveMode = driveMode_Rocket; // Default mode
+        m_driveMode = driveMode_SplitArcade; // Default mode
         m_precision = false;
     }
 
@@ -121,7 +121,7 @@ public class DriveBot extends Command
             Robot.sub_drivetrain.driveTank((-1.0) * getControllerLeftStickY(), (-1.0) * getControllerRightStickY());
             break;
 
-        case driveMode_Rocket:
+        case driveMode_SplitArcade:
             //split arcade drive mode
             double speed2 = -OI.getDriverController().getRawAxis(1) * 0.6;
             double curve2 = OI.getDriverController().getRawAxis(5) * 0.3;
