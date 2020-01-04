@@ -133,7 +133,7 @@ public class DriveBot extends Command
                 Robot.sub_drivetrain.getLeftTalon().set(curve2);
                 Robot.sub_drivetrain.getRightTalon().set(curve2);
             }
-            Robot.sub_drivetrain.drive(speed2, curve2, (m_driveMode == driveMode_Rocket));
+            Robot.sub_drivetrain.drive(speed2, curve2, (m_driveMode == driveMode_SplitArcade));
 
             Robot.sub_drivetrain.reportEncoders();
             break;
