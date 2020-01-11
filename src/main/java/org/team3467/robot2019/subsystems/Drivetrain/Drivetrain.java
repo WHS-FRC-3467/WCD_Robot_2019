@@ -2,8 +2,7 @@ package org.team3467.robot2019.subsystems.Drivetrain;
 
 import java.util.Map;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -24,8 +23,8 @@ public class Drivetrain extends Subsystem
 {
 
     // Motor controller objects and RobotDrive object
-    private final WPI_TalonSRX left_talon, right_talon;
-    private final WPI_VictorSPX left_victor_1, right_victor_1;
+    private final WPI_TalonFX left_talon_1, right_talon_1;
+    private final WPI_TalonFX left_talon_2, right_talon_2;
 
     private final DifferentialDrive m_drive;
     private ControlMode m_talonControlMode;
@@ -47,30 +46,30 @@ public class Drivetrain extends Subsystem
         // Setup tabs and data on the Shuffleboard
         setupShuffleboard();
 
-        // Three motors per side -> three speed controllers per side
-        left_victor_1 = new WPI_VictorSPX(RobotGlobal.DRIVEBASE_VICTOR_L1);
-        left_talon = new WPI_TalonSRX(RobotGlobal.DRIVEBASE_TALON_L);
-        right_victor_1 = new WPI_VictorSPX(RobotGlobal.DRIVEBASE_VICTOR_R1);
-        right_talon = new WPI_TalonSRX(RobotGlobal.DRIVEBASE_TALON_R);
+        // two motors per side -> two speed controllers per side
+        left_talon_1 = new WPI_TalonFX(RobotGlobal.DRIVEBASE_TALON_L1);
+        left_talon_2 = new WPI_TalonFX(RobotGlobal.DRIVEBASE_TALON_L2);
+        right_talon_1 = new WPI_TalonFX(RobotGlobal.DRIVEBASE_TALON_R1);
+        right_talon_2 = new WPI_TalonFX(RobotGlobal.DRIVEBASE_TALON_R2);
 
-        left_victor_1.configFactoryDefault();
-        left_talon.configFactoryDefault();
-        right_victor_1.configFactoryDefault();
-        right_talon.configFactoryDefault();
+        left_talon_1.configFactoryDefault();
+        left_talon_2.configFactoryDefault();
+        right_talon_1.configFactoryDefault();
+        right_talon_2.configFactoryDefault();
 
         // Slave the extra Talons on each side
-        left_victor_1.follow(left_talon);
-        right_victor_1.follow(right_talon);
+        left_talon_2.follow(left_talon_1);
+        right_talon_2.follow(right_talon_1);
 		
 		// Flip any sensors?
-		left_talon.setSensorPhase(true);
+		left_talon_1.setSensorPhase(true);
 		
 		// Invert all motors? (invert for driving backward)
 		boolean _inverted = false; 
-		left_talon.setInverted(_inverted);
-		left_victor_1.setInverted(_inverted);
-		right_talon.setInverted(_inverted);
-		right_victor_1.setInverted(_inverted);
+		left_talon_1.setInverted(_inverted);
+		left_talon_2.setInverted(_inverted);
+		right_talon_1.setInverted(_inverted);
+		right_talon_2.setInverted(_inverted);
 
 		// Turn off Brake mode
 		setTalonBrakes(false);
@@ -79,11 +78,11 @@ public class Drivetrain extends Subsystem
 		setControlMode(ControlMode.PercentOutput);
 		
  		// Set encoders as feedback device
-		left_talon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 10);
-		right_talon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 10);
+		left_talon_1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 10);
+		right_talon_1.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 10);
 		
 		// Instantiate DifferentialDrive
-		m_drive = new DifferentialDrive(left_talon, right_talon);
+		m_drive = new DifferentialDrive(left_talon_1, right_talon_1);
 		
         // DifferentialDrive Parameters
         m_drive.setDeadband(0.0); // we will add our own deadband as needed
@@ -170,14 +169,14 @@ public class Drivetrain extends Subsystem
         setDefaultCommand(new DriveBot());
     }
 
-    public WPI_TalonSRX getLeftTalon()
+    public WPI_TalonFX getLeftTalon()
     {
-        return left_talon;
+        return left_talon_1;
     }
 
-    public WPI_TalonSRX getRightTalon()
+    public WPI_TalonFX getRightTalon()
     {
-        return right_talon;
+        return right_talon_1;
     }
 
     // Use standard Tank Drive method
@@ -203,8 +202,8 @@ public class Drivetrain extends Subsystem
      */
     public void setControlMode(ControlMode controlMode)
     {
-        left_talon.set(controlMode, 0.0);
-        right_talon.set(controlMode, 0.0);
+        left_talon_1.set(controlMode, 0.0);
+        right_talon_1.set(controlMode, 0.0);
 
         // Save control mode so we will know if we have to set it back later
         m_talonControlMode = controlMode;
@@ -250,10 +249,10 @@ public class Drivetrain extends Subsystem
 
         NeutralMode nm = setBrake ? NeutralMode.Brake : NeutralMode.Coast;
 
-        left_talon.setNeutralMode(nm);
-        left_victor_1.setNeutralMode(nm);
-        right_talon.setNeutralMode(nm);
-        right_victor_1.setNeutralMode(nm);
+        left_talon_1.setNeutralMode(nm);
+        left_talon_2.setNeutralMode(nm);
+        right_talon_1.setNeutralMode(nm);
+        right_talon_2.setNeutralMode(nm);
 
         // On the Shuffleboard, show Red if brakes are set, Green if they are off
         nte_talonBrakes.setBoolean(!setBrake);
@@ -264,8 +263,8 @@ public class Drivetrain extends Subsystem
      */
     public double getDistance()
     {
-        return (left_talon.getSelectedSensorPosition(0) +
-                right_talon.getSelectedSensorPosition(0)) / 2;
+        return (left_talon_1.getSelectedSensorPosition(0) +
+                right_talon_1.getSelectedSensorPosition(0)) / 2;
     }
 
     /**
@@ -273,8 +272,8 @@ public class Drivetrain extends Subsystem
      */
     public void reportEncoders()
     {
-        nte_leftEncoderVal.setDouble(left_talon.getSelectedSensorPosition(0));
-        nte_rightEncoderVal.setDouble(right_talon.getSelectedSensorPosition(0));
+        nte_leftEncoderVal.setDouble(left_talon_1.getSelectedSensorPosition(0));
+        nte_rightEncoderVal.setDouble(right_talon_1.getSelectedSensorPosition(0));
     }
 
     /**
@@ -282,8 +281,8 @@ public class Drivetrain extends Subsystem
      */
     public void resetEncoders()
     {
-        left_talon.setSelectedSensorPosition(0, 0, 0);
-        right_talon.setSelectedSensorPosition(0, 0, 0);
+        left_talon_1.setSelectedSensorPosition(0, 0, 0);
+        right_talon_1.setSelectedSensorPosition(0, 0, 0);
     }
 
 }

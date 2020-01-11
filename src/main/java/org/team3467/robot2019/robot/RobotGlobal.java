@@ -6,12 +6,12 @@ public final class RobotGlobal
 
     // Addresses for Talons, Victors, etc.
     // right side
-    public final static int DRIVEBASE_TALON_R = 1;
-    public final static int DRIVEBASE_VICTOR_R1 = 2;
+    public final static int DRIVEBASE_TALON_R1 = 1;
+    public final static int DRIVEBASE_TALON_R2 = 2;
 
     // left side
-    public final static int DRIVEBASE_TALON_L = 3;
-    public final static int DRIVEBASE_VICTOR_L1 = 4;
+    public final static int DRIVEBASE_TALON_L1 = 3;
+    public final static int DRIVEBASE_TALON_L2 = 4;
 
     public final static int GYRO = 11;
 

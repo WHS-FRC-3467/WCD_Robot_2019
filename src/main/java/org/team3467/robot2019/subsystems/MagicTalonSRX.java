@@ -129,7 +129,6 @@ public class MagicTalonSRX extends TalonSRX
     private NetworkTableEntry nte_D;
     private NetworkTableEntry nte_F;
     private NetworkTableEntry nte_I100;
-    private NetworkTableEntry nte_currentDraw;
     private NetworkTableEntry nte_setPoint;
     private NetworkTableEntry nte_tolerance;
     private NetworkTableEntry nte_cruiseVel;
@@ -156,7 +155,6 @@ public class MagicTalonSRX extends TalonSRX
             nte_D = magicTalonList.add("D", 0.0).getEntry();
             nte_F = magicTalonList.add("F", 0.0).getEntry();
             nte_I100 = magicTalonList.add("I*100", 0.0).getEntry();
-            nte_currentDraw = magicTalonList.add("Current Draw", 0.0).getEntry();
             nte_setPoint = magicTalonList.add("Setpoint", 0.0).getEntry();
             nte_tolerance = magicTalonList.add("Tolerance", 0.0).getEntry();
             nte_cruiseVel = magicTalonList.add("Cruise Vel", 0.0).getEntry();
@@ -255,7 +253,7 @@ public class MagicTalonSRX extends TalonSRX
             nte_D.setDouble(configGetParameter(ParamEnum.eProfileParamSlot_D, m_slotNum, 0));
             nte_F.setDouble(configGetParameter(ParamEnum.eProfileParamSlot_F, m_slotNum, 0));
             nte_I100.setDouble((configGetParameter(ParamEnum.eProfileParamSlot_I, m_slotNum, 0)) * 100);
-            nte_currentDraw.setDouble(getOutputCurrent());
+            
         }
     }
 
